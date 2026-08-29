@@ -21,9 +21,26 @@ function Login() {
       return;
     }
 
+    // User ki profile aur role check karo
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", data.user.id)
+      .single();
+
+    if (profileError) {
+      alert(profileError.message);
+      return;
+    }
+
     alert("Login successful!");
 
-    navigate("/student-dashboard");
+    // Role ke according dashboard
+    if (profile.role === "admin") {
+      navigate("/admin-dashboard");
+    } else {
+      navigate("/student-dashboard");
+    }
   };
 
   return (
@@ -53,6 +70,9 @@ function Login() {
         <button type="submit">
           Login
         </button>
+       <button type="button" onClick={() => navigate("/forgot-password")}>
+        Forgot Password?
+       </button>
 
       </form>
     </div>
