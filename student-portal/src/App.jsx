@@ -5,6 +5,9 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Profile from "./pages/Profile";
+import Courses from "./pages/Courses";
+import Results from "./pages/Results";
 import StudentDashboard from "./pages/StudentDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./ProtectedRoute";
@@ -28,6 +31,21 @@ function App() {
          path="/reset-password"
          element={<ResetPassword />}
          />
+
+         <Route path="/profile" element={
+         <ProtectedRoute>
+         <Profile />
+         </ProtectedRoute>}/>
+
+          <Route path="/courses" element={
+          <ProtectedRoute>
+          <Courses />
+          </ProtectedRoute> }/>
+
+         <Route path="/results" element={
+        <ProtectedRoute>
+        <Results />
+        </ProtectedRoute>}/>
 
         <Route
           path="/student-dashboard"

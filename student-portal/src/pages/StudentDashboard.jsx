@@ -18,9 +18,9 @@ function StudentDashboard() {
 
       <p>Here you can manage your student information.</p>
 
-      <button>My Profile</button>
-      <button>Courses</button>
-      <button>Results</button>
+      <button onClick={() => navigate("/profile")}> My Profile</button>
+      <button onClick={() => navigate("/courses")}> Courses</button>
+      <button onClick={() => navigate("/results")}> Results</button>
 
       <button onClick={handleLogout}>Logout</button>
     </div>
