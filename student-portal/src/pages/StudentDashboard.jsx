@@ -18,11 +18,28 @@ function StudentDashboard() {
 
       <p>Here you can manage your student information.</p>
 
-      <button onClick={() => navigate("/profile")}> My Profile</button>
-      <button onClick={() => navigate("/courses")}> Courses</button>
-      <button onClick={() => navigate("/results")}> Results</button>
+      <button onClick={() => navigate("/profile")}>
+        My Profile
+      </button>
 
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={() => navigate("/courses")}>
+        Courses
+      </button>
+
+      <button onClick={() => navigate("/results")}>
+        Results
+      </button>
+
+      <button onClick={() => navigate("/announcements")}>
+        Announcements
+      </button>
+      <button onClick={() => navigate("/attendance")}>
+       Attendance
+       </button>
+
+      <button onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 }

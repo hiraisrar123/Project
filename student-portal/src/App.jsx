@@ -12,6 +12,9 @@ import StudentDashboard from "./pages/StudentDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminRoute from "./AdminRoute";
+import Announcements from "./pages/Announcements";
+import Attendance from "./pages/Attendance";
+import Students from "./pages/Students";
 
 
 function App() {
@@ -45,7 +48,8 @@ function App() {
          <Route path="/results" element={
         <ProtectedRoute>
         <Results />
-        </ProtectedRoute>}/>
+        </ProtectedRoute>}
+/>
 
         <Route
           path="/student-dashboard"
@@ -61,9 +65,22 @@ function App() {
           element={
             <AdminRoute>
               <AdminDashboard />
-            </AdminRoute>
-          }
-        />
+            </AdminRoute>}/>
+
+        <Route path="/announcements" element={
+        <ProtectedRoute>
+       <Announcements />
+       </ProtectedRoute> }/>
+
+       <Route path="/attendance" element={
+        <ProtectedRoute>
+        <Attendance />
+        </ProtectedRoute>  }/>
+
+       <Route path="/students" element={
+       <AdminRoute>
+        <Students />
+       </AdminRoute> }/>
 
       </Routes>
     </BrowserRouter>
