@@ -32,9 +32,7 @@ function TicketDetails() {
               (msg) => msg.id === payload.new.id
             );
 
-            if (alreadyExists) {
-              return currentMessages;
-            }
+            if (alreadyExists) return currentMessages;
 
             return [...currentMessages, payload.new];
           });
@@ -140,52 +138,60 @@ function TicketDetails() {
   };
 
   const getStatusStyle = (status) => {
-    if (status === "Resolved") {
-      return {
-        background: "#dcfce7",
-        color: "#166534",
-      };
-    }
+    switch (status) {
+      case "Resolved":
+        return {
+          background: "#dcfce7",
+          color: "#166534",
+          border: "1px solid #bbf7d0",
+        };
 
-    if (status === "In Progress") {
-      return {
-        background: "#fef3c7",
-        color: "#92400e",
-      };
-    }
+      case "In Progress":
+        return {
+          background: "#fef3c7",
+          color: "#92400e",
+          border: "1px solid #fde68a",
+        };
 
-    if (status === "Assigned") {
-      return {
-        background: "#dbeafe",
-        color: "#1e40af",
-      };
-    }
+      case "Assigned":
+        return {
+          background: "#dbeafe",
+          color: "#1e40af",
+          border: "1px solid #bfdbfe",
+        };
 
-    return {
-      background: "#f3f4f6",
-      color: "#374151",
-    };
+      default:
+        return {
+          background: "#f3f4f6",
+          color: "#374151",
+          border: "1px solid #e5e7eb",
+        };
+    }
   };
 
   const getPriorityStyle = (priority) => {
-    if (priority === "High") {
-      return {
-        background: "#fee2e2",
-        color: "#b91c1c",
-      };
-    }
+    switch (priority) {
+      case "High":
+        return {
+          background: "#fee2e2",
+          color: "#b91c1c",
+          border: "1px solid #fecaca",
+        };
 
-    if (priority === "Low") {
-      return {
-        background: "#dcfce7",
-        color: "#166534",
-      };
-    }
+      case "Low":
+        return {
+          background: "#dcfce7",
+          color: "#166534",
+          border: "1px solid #bbf7d0",
+        };
 
-    return {
-      background: "#fef3c7",
-      color: "#92400e",
-    };
+      default:
+        return {
+          background: "#fef3c7",
+          color: "#92400e",
+          border: "1px solid #fde68a",
+        };
+    }
   };
 
   if (loading) {
@@ -193,30 +199,55 @@ function TicketDetails() {
       <div
         style={{
           minHeight: "100vh",
+          background: "linear-gradient(135deg, #eef2ff, #f5f3ff)",
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
-          background:
-            "linear-gradient(135deg, #eef2ff, #f5f3ff, #ecfeff)",
+          justifyContent: "center",
           fontFamily: "Arial, sans-serif",
         }}
       >
         <div
           style={{
-            background: "white",
-            padding: "35px 45px",
-            borderRadius: "18px",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+            background: "#ffffff",
+            padding: "45px",
+            borderRadius: "24px",
             textAlign: "center",
+            boxShadow: "0 15px 40px rgba(0,0,0,0.08)",
           }}
         >
-          <div style={{ fontSize: "40px", marginBottom: "10px" }}>
+          <div
+            style={{
+              width: "65px",
+              height: "65px",
+              borderRadius: "18px",
+              background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "30px",
+              margin: "0 auto 18px",
+            }}
+          >
             🎫
           </div>
 
-          <h2 style={{ color: "#4f46e5", margin: 0 }}>
+          <h2
+            style={{
+              margin: 0,
+              color: "#111827",
+            }}
+          >
             Loading Ticket...
           </h2>
+
+          <p
+            style={{
+              color: "#6b7280",
+              marginBottom: 0,
+            }}
+          >
+            Please wait a moment
+          </p>
         </div>
       </div>
     );
@@ -227,14 +258,41 @@ function TicketDetails() {
       <div
         style={{
           minHeight: "100vh",
+          background: "#f8fafc",
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
-          background: "#f5f7fb",
+          justifyContent: "center",
           fontFamily: "Arial, sans-serif",
         }}
       >
-        <h2>Ticket not found.</h2>
+        <div
+          style={{
+            background: "#fff",
+            padding: "40px",
+            borderRadius: "20px",
+            textAlign: "center",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+          }}
+        >
+          <div style={{ fontSize: "50px" }}>😕</div>
+
+          <h2>Ticket Not Found</h2>
+
+          <button
+            onClick={() => navigate("/my-tickets")}
+            style={{
+              background: "#4f46e5",
+              color: "#fff",
+              border: "none",
+              padding: "12px 20px",
+              borderRadius: "9px",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            Back to My Tickets
+          </button>
+        </div>
       </div>
     );
   }
@@ -243,43 +301,79 @@ function TicketDetails() {
     <div
       style={{
         minHeight: "100vh",
-        background:
-          "linear-gradient(135deg, #eef2ff, #f5f3ff, #ecfeff)",
+        background: "linear-gradient(135deg, #eef2ff, #f8fafc, #f5f3ff)",
         fontFamily: "Arial, sans-serif",
-        paddingBottom: "40px",
+        paddingBottom: "50px",
       }}
     >
-      {/* Navbar */}
+      {/* NAVBAR */}
       <nav
         style={{
-          background: "white",
-          padding: "18px 5%",
+          background: "rgba(255,255,255,0.95)",
+          padding: "18px 6%",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          gap: "15px",
-          flexWrap: "wrap",
-          boxShadow: "0 3px 15px rgba(0,0,0,0.08)",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
+          position: "sticky",
+          top: 0,
+          zIndex: 10,
+          backdropFilter: "blur(10px)",
         }}
       >
-        <h2
+        <div
           style={{
-            margin: 0,
-            color: "#4f46e5",
-            fontSize: "24px",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
           }}
         >
-          SupportFlow
-        </h2>
+          <div
+            style={{
+              width: "42px",
+              height: "42px",
+              borderRadius: "12px",
+              background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#fff",
+              fontSize: "21px",
+            }}
+          >
+            🎫
+          </div>
+
+          <div>
+            <h2
+              style={{
+                margin: 0,
+                color: "#111827",
+                fontSize: "21px",
+              }}
+            >
+              SupportFlow
+            </h2>
+
+            <span
+              style={{
+                fontSize: "11px",
+                color: "#6b7280",
+              }}
+            >
+              Customer Support
+            </span>
+          </div>
+        </div>
 
         <button
           onClick={() => navigate("/my-tickets")}
           style={{
             background: "#eef2ff",
             color: "#4338ca",
-            border: "none",
-            padding: "10px 18px",
-            borderRadius: "9px",
+            border: "1px solid #c7d2fe",
+            padding: "10px 17px",
+            borderRadius: "10px",
             cursor: "pointer",
             fontWeight: "bold",
           }}
@@ -288,26 +382,60 @@ function TicketDetails() {
         </button>
       </nav>
 
-      {/* Main */}
+      {/* MAIN */}
       <main
         style={{
-          width: "90%",
-          maxWidth: "950px",
+          width: "92%",
+          maxWidth: "1000px",
           margin: "0 auto",
           paddingTop: "35px",
         }}
       >
-        {/* Ticket Card */}
-        <div
+        {/* PAGE TITLE */}
+        <div style={{ marginBottom: "22px" }}>
+          <p
+            style={{
+              margin: "0 0 7px",
+              color: "#4f46e5",
+              fontWeight: "bold",
+              fontSize: "13px",
+            }}
+          >
+            SUPPORT TICKET
+          </p>
+
+          <h1
+            style={{
+              margin: 0,
+              color: "#111827",
+              fontSize: "30px",
+            }}
+          >
+            Ticket Details
+          </h1>
+
+          <p
+            style={{
+              color: "#6b7280",
+              marginTop: "7px",
+            }}
+          >
+            View your ticket information and communicate with support.
+          </p>
+        </div>
+
+        {/* TICKET INFORMATION */}
+        <section
           style={{
-            background: "white",
-            borderRadius: "20px",
+            background: "#ffffff",
+            borderRadius: "22px",
             padding: "30px",
-            boxShadow: "0 8px 25px rgba(0,0,0,0.08)",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.07)",
+            border: "1px solid #e5e7eb",
             marginBottom: "22px",
           }}
         >
-          {/* Ticket Header */}
+          {/* HEADER */}
           <div
             style={{
               display: "flex",
@@ -317,107 +445,157 @@ function TicketDetails() {
               flexWrap: "wrap",
             }}
           >
-            <div>
-              <div
+            <div style={{ flex: 1 }}>
+              <span
                 style={{
                   display: "inline-block",
                   background: "#eef2ff",
                   color: "#4f46e5",
-                  padding: "6px 12px",
+                  padding: "7px 13px",
                   borderRadius: "20px",
-                  fontSize: "13px",
+                  fontSize: "12px",
                   fontWeight: "bold",
                   marginBottom: "12px",
                 }}
               >
                 {ticket.ticket_number}
-              </div>
+              </span>
 
-              <h1
+              <h2
                 style={{
                   margin: 0,
                   color: "#111827",
-                  fontSize: "28px",
-                  lineHeight: "1.3",
+                  fontSize: "27px",
+                  lineHeight: "1.35",
                 }}
               >
                 {ticket.subject}
-              </h1>
+              </h2>
             </div>
 
             <span
               style={{
                 ...getStatusStyle(ticket.status),
-                padding: "8px 15px",
+                padding: "9px 16px",
                 borderRadius: "25px",
-                fontWeight: "bold",
                 fontSize: "13px",
+                fontWeight: "bold",
                 whiteSpace: "nowrap",
               }}
             >
-              {ticket.status}
+              ● {ticket.status}
             </span>
           </div>
 
-          {/* Tags */}
+          {/* DETAILS */}
           <div
             style={{
-              display: "flex",
-              gap: "10px",
-              flexWrap: "wrap",
-              marginTop: "22px",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: "15px",
+              marginTop: "25px",
             }}
           >
-            <span
+            <div
               style={{
-                background: "#f3f4f6",
-                color: "#374151",
-                padding: "8px 12px",
-                borderRadius: "8px",
-                fontSize: "13px",
+                background: "#f8fafc",
+                padding: "16px",
+                borderRadius: "12px",
+                border: "1px solid #e5e7eb",
               }}
             >
-              📁 {ticket.category || "Not Assigned"}
-            </span>
+              <small
+                style={{
+                  display: "block",
+                  color: "#94a3b8",
+                  marginBottom: "6px",
+                  fontWeight: "bold",
+                }}
+              >
+                CATEGORY
+              </small>
 
-            <span
+              <strong style={{ color: "#374151" }}>
+                📁 {ticket.category || "Not Assigned"}
+              </strong>
+            </div>
+
+            <div
               style={{
                 ...getPriorityStyle(ticket.priority),
-                padding: "8px 12px",
-                borderRadius: "8px",
-                fontSize: "13px",
-                fontWeight: "bold",
+                padding: "16px",
+                borderRadius: "12px",
               }}
             >
-              ⚡ {ticket.priority || "Medium"} Priority
-            </span>
+              <small
+                style={{
+                  display: "block",
+                  marginBottom: "6px",
+                  fontWeight: "bold",
+                  opacity: 0.75,
+                }}
+              >
+                PRIORITY
+              </small>
+
+              <strong>
+                ⚡ {ticket.priority || "Medium"}
+              </strong>
+            </div>
+
+            <div
+              style={{
+                background: "#f8fafc",
+                padding: "16px",
+                borderRadius: "12px",
+                border: "1px solid #e5e7eb",
+              }}
+            >
+              <small
+                style={{
+                  display: "block",
+                  color: "#94a3b8",
+                  marginBottom: "6px",
+                  fontWeight: "bold",
+                }}
+              >
+                CREATED
+              </small>
+
+              <strong style={{ color: "#374151" }}>
+                📅{" "}
+                {ticket.created_at
+                  ? new Date(ticket.created_at).toLocaleDateString()
+                  : "N/A"}
+              </strong>
+            </div>
           </div>
 
-          {/* Description */}
+          {/* DESCRIPTION */}
           <div
             style={{
-              marginTop: "25px",
-              background:
-                "linear-gradient(135deg, #f8faff, #f5f3ff)",
-              borderRadius: "14px",
-              padding: "20px",
+              marginTop: "22px",
+              background: "linear-gradient(135deg, #f8faff, #f5f3ff)",
               border: "1px solid #e0e7ff",
+              borderRadius: "15px",
+              padding: "21px",
             }}
           >
             <h3
               style={{
                 margin: "0 0 10px",
                 color: "#3730a3",
+                fontSize: "17px",
               }}
             >
-              Issue Description
+              📝 Issue Description
             </h3>
 
             <p
               style={{
                 margin: 0,
                 color: "#4b5563",
-                lineHeight: "1.7",
+                lineHeight: "1.75",
                 whiteSpace: "pre-wrap",
               }}
             >
@@ -425,20 +603,20 @@ function TicketDetails() {
             </p>
           </div>
 
-          {/* Resolution Note */}
+          {/* RESOLUTION */}
           {ticket.resolution_note && (
             <div
               style={{
                 marginTop: "15px",
                 background: "#ecfdf5",
                 border: "1px solid #bbf7d0",
-                borderRadius: "14px",
-                padding: "18px",
+                borderRadius: "15px",
+                padding: "21px",
               }}
             >
               <h3
                 style={{
-                  margin: "0 0 8px",
+                  margin: "0 0 9px",
                   color: "#166534",
                 }}
               >
@@ -449,24 +627,26 @@ function TicketDetails() {
                 style={{
                   margin: 0,
                   color: "#365314",
-                  lineHeight: "1.6",
+                  lineHeight: "1.7",
                 }}
               >
                 {ticket.resolution_note}
               </p>
             </div>
           )}
-        </div>
+        </section>
 
-        {/* Conversation */}
-        <div
+        {/* CONVERSATION */}
+        <section
           style={{
-            background: "white",
-            borderRadius: "20px",
+            background: "#ffffff",
+            borderRadius: "22px",
             padding: "30px",
-            boxShadow: "0 8px 25px rgba(0,0,0,0.08)",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.07)",
+            border: "1px solid #e5e7eb",
           }}
         >
+          {/* CONVERSATION HEADER */}
           <div
             style={{
               display: "flex",
@@ -474,7 +654,8 @@ function TicketDetails() {
               alignItems: "center",
               gap: "15px",
               flexWrap: "wrap",
-              marginBottom: "20px",
+              paddingBottom: "20px",
+              borderBottom: "1px solid #e5e7eb",
             }}
           >
             <div>
@@ -482,6 +663,7 @@ function TicketDetails() {
                 style={{
                   margin: 0,
                   color: "#111827",
+                  fontSize: "23px",
                 }}
               >
                 💬 Conversation
@@ -494,147 +676,185 @@ function TicketDetails() {
                   fontSize: "14px",
                 }}
               >
-                Communicate with the support team
+                Chat with our support team
               </p>
             </div>
 
-            <span
+            <div
               style={{
                 background: "#eef2ff",
-                color: "#4f46e5",
-                padding: "7px 12px",
+                color: "#4338ca",
+                padding: "8px 13px",
                 borderRadius: "20px",
                 fontSize: "12px",
                 fontWeight: "bold",
               }}
             >
-              {messages.length} Message
-              {messages.length !== 1 ? "s" : ""}
-            </span>
+              {messages.length}{" "}
+              {messages.length === 1 ? "Message" : "Messages"}
+            </div>
           </div>
 
-          {/* Messages */}
-          {messages.length === 0 ? (
-            <div
-              style={{
-                background: "#f8fafc",
-                border: "1px dashed #cbd5e1",
-                padding: "35px 20px",
-                borderRadius: "14px",
-                textAlign: "center",
-                color: "#64748b",
-                marginBottom: "25px",
-              }}
-            >
-              <div style={{ fontSize: "40px", marginBottom: "10px" }}>
-                💬
-              </div>
-
-              <h3 style={{ margin: "0 0 6px", color: "#374151" }}>
-                No messages yet
-              </h3>
-
-              <p style={{ margin: 0 }}>
-                Start the conversation with our support team below.
-              </p>
-            </div>
-          ) : (
-            <div
-              style={{
-                maxHeight: "450px",
-                overflowY: "auto",
-                paddingRight: "5px",
-                marginBottom: "25px",
-              }}
-            >
-              {messages.map((item) => (
+          {/* MESSAGES */}
+          <div
+            style={{
+              marginTop: "20px",
+              marginBottom: "25px",
+            }}
+          >
+            {messages.length === 0 ? (
+              <div
+                style={{
+                  background: "#f8fafc",
+                  border: "1px dashed #cbd5e1",
+                  borderRadius: "16px",
+                  padding: "45px 20px",
+                  textAlign: "center",
+                }}
+              >
                 <div
-                  key={item.id}
                   style={{
-                    background:
-                      "linear-gradient(135deg, #f8fafc, #f5f3ff)",
-                    border: "1px solid #e5e7eb",
-                    padding: "16px",
-                    marginBottom: "12px",
-                    borderRadius: "13px",
+                    fontSize: "45px",
+                    marginBottom: "10px",
                   }}
                 >
-                  <p
-                    style={{
-                      margin: "0 0 10px",
-                      color: "#374151",
-                      lineHeight: "1.6",
-                      whiteSpace: "pre-wrap",
-                    }}
-                  >
-                    {item.message}
-                  </p>
-
-                  <small
-                    style={{
-                      color: "#9ca3af",
-                    }}
-                  >
-                    🕐 {new Date(item.created_at).toLocaleString()}
-                  </small>
+                  💬
                 </div>
-              ))}
-            </div>
-          )}
 
-          {/* Reply */}
+                <h3
+                  style={{
+                    margin: "0 0 7px",
+                    color: "#374151",
+                  }}
+                >
+                  No messages yet
+                </h3>
+
+                <p
+                  style={{
+                    margin: 0,
+                    color: "#64748b",
+                  }}
+                >
+                  Send a message below to contact the support team.
+                </p>
+              </div>
+            ) : (
+              <div
+                style={{
+                  maxHeight: "430px",
+                  overflowY: "auto",
+                  padding: "5px",
+                }}
+              >
+                {messages.map((item) => (
+                  <div
+                    key={item.id}
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      marginBottom: "15px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        maxWidth: "78%",
+                        background:
+                          "linear-gradient(135deg, #eef2ff, #f5f3ff)",
+                        border: "1px solid #ddd6fe",
+                        padding: "15px 17px",
+                        borderRadius: "16px 16px 4px 16px",
+                      }}
+                    >
+                      <p
+                        style={{
+                          margin: "0 0 9px",
+                          color: "#374151",
+                          lineHeight: "1.65",
+                          whiteSpace: "pre-wrap",
+                        }}
+                      >
+                        {item.message}
+                      </p>
+
+                      <small
+                        style={{
+                          color: "#8b5cf6",
+                          fontSize: "11px",
+                        }}
+                      >
+                        🕐{" "}
+                        {new Date(item.created_at).toLocaleString()}
+                      </small>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* SEND MESSAGE */}
           <form onSubmit={sendMessage}>
             <label
               style={{
                 display: "block",
-                marginBottom: "8px",
+                marginBottom: "9px",
                 color: "#374151",
                 fontWeight: "bold",
+                fontSize: "14px",
               }}
             >
-              Send a Message
+              Write a message
             </label>
 
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Write your message to the support team..."
+              placeholder="Type your message here..."
               rows="5"
               style={{
                 width: "100%",
                 boxSizing: "border-box",
-                padding: "14px",
+                padding: "15px",
                 border: "1px solid #d1d5db",
-                borderRadius: "12px",
+                borderRadius: "13px",
                 resize: "vertical",
                 fontSize: "14px",
                 fontFamily: "Arial, sans-serif",
                 outline: "none",
+                background: "#fafafa",
               }}
             />
 
-            <button
-              type="submit"
-              disabled={sending}
+            <div
               style={{
+                display: "flex",
+                justifyContent: "flex-end",
                 marginTop: "12px",
-                width: "100%",
-                background: sending
-                  ? "#a5b4fc"
-                  : "linear-gradient(135deg, #4f46e5, #7c3aed)",
-                color: "white",
-                border: "none",
-                padding: "14px",
-                borderRadius: "10px",
-                cursor: sending ? "not-allowed" : "pointer",
-                fontWeight: "bold",
-                fontSize: "15px",
               }}
             >
-              {sending ? "Sending..." : "📨 Send Message"}
-            </button>
+              <button
+                type="submit"
+                disabled={sending}
+                style={{
+                  background: sending
+                    ? "#a5b4fc"
+                    : "linear-gradient(135deg, #4f46e5, #7c3aed)",
+                  color: "#ffffff",
+                  border: "none",
+                  padding: "13px 24px",
+                  borderRadius: "10px",
+                  cursor: sending ? "not-allowed" : "pointer",
+                  fontWeight: "bold",
+                  fontSize: "14px",
+                  boxShadow: "0 5px 15px rgba(79,70,229,0.25)",
+                }}
+              >
+                {sending ? "Sending..." : "📨 Send Message"}
+              </button>
+            </div>
           </form>
-        </div>
+        </section>
       </main>
     </div>
   );
