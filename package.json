@@ -1,21 +1,6 @@
 {
-  "name": "student-portal",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite",
-    "preview": "vite preview"
-  },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.4",
-    "react-router-dom": "^7.18.2",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^latest",
-    "vite": "^latest"
+    "react-router-dom": "^7.18.2"
   }
 }
